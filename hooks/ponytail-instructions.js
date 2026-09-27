@@ -63,6 +63,7 @@ function getFallbackInstructions(mode) {
     'Between two same-size stdlib options, pick the one correct on edge cases. ' +
     'Mark deliberate simplifications that cut a real corner with a known ceiling, using a `ponytail:` comment that names the ceiling and upgrade path.\n\n' +
     'Simple, not short: count the ideas a reader must hold, not the lines. Split dense one-liners into named steps. Follow the codebase patterns, even when a shorter form exists. Clear beats clever.\n\n' +
+    'Think-first checks: before the code, pick the 2-3 most relevant of Need, Reuse, Readability, Consistency, Edge cases, Trust boundary, Failure, Test. Ask each as a task-specific question, then answer it and say what it changed. On "coach me"/"quiz me": ask only, wait for the user, then mark, fill in the blanks, explain, then code.\n\n' +
     '## Output\n\n' +
     'Code stays minimal. Explanation teaches. First line: one action the reader can do now, no preamble. ' +
     'Numbered steps, one imperative action each. Concrete time estimates. Last line: ONE next thing. ' +
