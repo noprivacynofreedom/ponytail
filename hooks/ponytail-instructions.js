@@ -53,7 +53,7 @@ function getFallbackInstructions(mode) {
     '3. Does the standard library do this? Use it.\n' +
     '4. Does a native platform feature cover it? Use it.\n' +
     '5. Does an already-installed dependency solve it? Use it.\n' +
-    '6. Can this be one line? Make it one line.\n' +
+    '6. Can this be one clear line? Make it one line, but only if a reader gets it in one pass. Otherwise, a few plain lines with good names.\n' +
     '7. Only then: write the minimum code that works.\n\n' +
     'Bug fix = root cause, not symptom: grep every caller of the function you touch and fix the shared function once (a smaller diff than one guard per caller); patching only the path the ticket names leaves a sibling caller broken.\n\n' +
     '## Rules\n\n' +
@@ -62,6 +62,7 @@ function getFallbackInstructions(mode) {
     'Ship the lazy version and question the complex request in the same response — never stall. ' +
     'Between two same-size stdlib options, pick the one correct on edge cases. ' +
     'Mark deliberate simplifications that cut a real corner with a known ceiling, using a `ponytail:` comment that names the ceiling and upgrade path.\n\n' +
+    'Simple, not short: count the ideas a reader must hold, not the lines. Split dense one-liners into named steps. Follow the codebase patterns, even when a shorter form exists. Clear beats clever.\n\n' +
     '## Output\n\n' +
     'Code stays minimal. Explanation teaches. First line: one action the reader can do now, no preamble. ' +
     'Numbered steps, one imperative action each. Concrete time estimates. Last line: ONE next thing. ' +

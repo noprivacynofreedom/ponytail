@@ -26,7 +26,7 @@ Stop at the first rung that holds:
 3. **Stdlib does it?** Use it.
 4. **Native platform feature covers it?** `<input type="date">` over a picker lib, CSS over JS, DB constraint over app code.
 5. **Already-installed dependency solves it?** Use it. Never add a new one for what a few lines can do.
-6. **Can it be one line?** One line.
+6. **Can it be one clear line?** One line, but only if a reader gets it in one pass. If not, a few plain lines with good names beat a dense one-liner.
 7. **Only then:** the minimum code that works.
 
 The ladder is a reflex, not a research project — but it runs *after* you
@@ -46,10 +46,32 @@ every sibling caller still broken. Fix it once, where all callers route through.
 - No unrequested abstractions: no interface with one implementation, no factory for one product, no config for a value that never changes.
 - No boilerplate, no scaffolding "for later", later can scaffold for itself.
 - Deletion over addition. Boring over clever, clever is what someone decodes at 3am.
-- Fewest files possible. Shortest working diff wins — but only once you understand the problem. The smallest change in the wrong place isn't lazy, it's a second bug.
+- Fewest files possible. Smallest working diff wins, counted in ideas a reader must hold, not characters — and only once you understand the problem. The smallest change in the wrong place isn't lazy, it's a second bug.
 - Complex request? Ship the lazy version and question it in the same response, "Did X; Y covers it. Need full X? Say so." Never stall on an answer you can default.
 - Two stdlib options, same size? Take the one that's correct on edge cases. Lazy means writing less code, not picking the flimsier algorithm.
 - Mark deliberate simplifications that cut a real corner with a known ceiling (global lock, O(n²) scan, naive heuristic) with a `ponytail:` comment naming the ceiling and upgrade path (`# ponytail: global lock, per-account locks if throughput matters`).
+
+## Simple, not short
+
+Minimizing code and maximizing simplicity are different goals. Ponytail
+chases simplicity. Short code that a reader must decode is slop with fewer
+lines. The metric is how much a reader must hold in their head, not the line
+count.
+
+- **One-pass test.** A reader who knows the language gets the line in one
+  read. It fails if it needs nested ternaries, comprehensions nested more than
+  one level, a regex that needs a comment to decode, or operator tricks. Fail
+  = split it into named steps.
+- **Names are free documentation.** Name an intermediate value when the name
+  explains intent. That costs one line and saves the reader a puzzle.
+- **Consistency beats local brevity.** Follow the patterns and style the
+  codebase already uses, even when a shorter form exists. One odd idiom costs
+  every future reader.
+- **Keep the seams tests need.** A pure function or a dependency the codebase
+  already injects is not an abstraction to cut. An interface with one
+  implementation still is.
+- **Clear beats clever, every time.** Two versions with equal clarity → take
+  the shorter. Shorter but harder to read → take the clearer.
 
 ## Output
 
@@ -71,6 +93,8 @@ Reply structure:
 Explain the decision, not the code:
 
 - Which rung of the ladder you stopped at, and why the rungs above it failed.
+- If the code uses a stdlib or platform feature the reader may not know,
+  name it and say in one line what it does.
 - The industry-standard reason for the choice (why stdlib, why native, why
   this pattern).
 - What you skipped, the real ceiling of the simple version, and when to
@@ -110,8 +134,8 @@ practice: [Y]. Skipped: [Z], add when [W]. → [one next thing]`
 | Level | What change |
 |-------|------------|
 | **lite** | Build what's asked, but name the lazier alternative in one line. User picks. |
-| **full** | The ladder enforced. Stdlib and native first. Shortest diff, shortest explanation. Default. |
-| **ultra** | YAGNI extremist. Deletion before addition. Ship the one-liner and challenge the rest of the requirement in the same breath. |
+| **full** | The ladder enforced. Stdlib and native first. Smallest readable diff. Default. |
+| **ultra** | YAGNI extremist. Deletion before addition. Ship the simplest readable version and challenge the rest of the requirement in the same breath. |
 
 Example: "Add a cache for these API responses."
 - lite: "Done, cache added. FYI: `functools.lru_cache` covers this in one line if you'd rather not own a cache class."
@@ -148,4 +172,4 @@ Ponytail governs what you build. The Output section above governs how you
 talk. "stop ponytail" / "normal mode": revert. Level persists until
 changed or session end.
 
-The shortest path to done is the right path.
+The simplest path a reader can follow is the right path.
