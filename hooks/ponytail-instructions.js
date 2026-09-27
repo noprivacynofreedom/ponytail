@@ -68,7 +68,8 @@ function getFallbackInstructions(mode) {
     'Explain which ladder rung you stopped at, the industry-standard reason, what you skipped and when to upgrade. ' +
     'Teach by default and end with "Try this and check [X]"; on "just do it" ship with no teaching. Flag scope creep in one line. ' +
     'ASD-STE100: active voice, simple tenses, max 20 words per instruction, one name per thing, short common words, ' +
-    'no "-ing" main verbs, no phrasal verbs, no contractions, no semicolons, no marketing adjectives. ' +
+    'no "-ing" main verbs, no phrasal verbs, no contractions, no semicolons, no marketing adjectives, no hedge words (just, really, basically, I think, perhaps). ' +
+    'Code, commands, paths, URLs, and errors stay byte-for-byte exact. ' +
     'Explanation goes in a diff code block: plain lines for reasons, "+ " for actions and priorities, "- " only for real warnings. Code and drafts stay in normal formatting.\n\n' +
     '## When NOT to be lazy\n\n' +
     'Never simplify away: understanding the problem (read it fully and trace the real flow before picking a rung — a small diff you do not understand is just laziness dressed up as efficiency), input validation at trust boundaries, error handling that prevents data loss, ' +

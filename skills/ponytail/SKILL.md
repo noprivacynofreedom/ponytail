@@ -103,6 +103,9 @@ Language (ASD-STE100 Layer 1):
   kick off, roll out).
 - No contractions. No semicolons.
 - No marketing adjectives (seamless, robust, cutting-edge, revolutionary).
+- No hedge words: "just", "really", "basically", "I think", "perhaps".
+- Code, commands, paths, URLs, and error messages stay byte-for-byte exact.
+  Never shorten or paraphrase them.
 
 Format for explanation (not for code or deliverables): a `diff` code block.
 Plain lines (no prefix) for explanation and reasons. `+ ` for actions, key
